@@ -2,7 +2,7 @@
 
 Esta é uma estrutura de pastas genérica para um fluxo de trabalho usando o R. Você pode fazer o download ao clicar no botão verde _code_ e selecionar a última opção `download_zip`
 
-Os slides da oficina estão disponíveis [aqui](https://github.com/liibre/instituto_hub).
+Os slides da oficina estão disponíveis [aqui](https://liibre.github.io/instituto_hub/#1).
 
     .
     ├── codigo            # scripts de R
