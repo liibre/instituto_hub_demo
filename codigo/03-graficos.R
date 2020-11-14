@@ -10,7 +10,7 @@ macapa$date <- as.Date(macapa$date)
 plot(new_confirmed ~ date, data = macapa)
 lines(new_confirmed ~ date, data = macapa)
 
-# um grafico melhor --------------------------
+# um grafico melhor
 # usando a funcao par para controlar parametros
 par(bty = "l", las = 1)
 # adicionando nome dos eixos
@@ -20,13 +20,37 @@ plot(new_confirmed ~ date, data = macapa,
 lines(new_confirmed ~ date, data = macapa)
 #funcao dev.off()
 
-# para exportar o grafico ----------------------
-png("figs/casos_diarios_Macapa.png", res = 300,
-    width = 1400, height = 1200)
-par(bty = "l", las = 1)
-# adicionando nome dos eixos
+# Lidando com cores ----------------------------
+vermelho <- "#A70000" #ou rgb(167, 0, 0, maxColorValue = 255)
+vermelho_trans <- rgb(167, 0, 0, alpha = 150, maxColorValue = 255)
+
 plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
-     ylab = "Casos diários")
-lines(new_confirmed ~ date, data = macapa)
+     ylab = "Casos diários",
+     col = vermelho) # muda cor
+lines(new_confirmed ~ date, data = macapa,
+      col = vermelho_trans) # muda cor
+
+# Mudando o ponto
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários",
+     col = vermelho_trans,
+     pch = 19,# muda tipo de ponto
+     log = "y") # escala log no eixo y
+lines(new_confirmed ~ date, data = macapa,
+      col = vermelho_trans)
+text("Fonte: Brasil.io", x = )
+
+# para exportar o grafico ----------------------
+png("figs/casos_diarios_Macapa.png", res = 300,
+    width = 1500, height = 1200)
+par(bty = "l", las = 1)
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários",
+     col = vermelho_trans, # muda tipo de ponto
+     pch = 19, log = "y")
+lines(new_confirmed ~ date, data = macapa,
+      col = vermelho_trans)
 dev.off()
