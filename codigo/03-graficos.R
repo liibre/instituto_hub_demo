@@ -40,7 +40,8 @@ plot(new_confirmed ~ date, data = macapa,
      log = "y") # escala log no eixo y
 lines(new_confirmed ~ date, data = macapa,
       col = vermelho_trans)
-text("Fonte: Brasil.io", x = )
+mtext("Fonte: Brasil.io", side = 1, adj = 1,
+      padj = 8, cex = 0.8)
 
 # para exportar o grafico ----------------------
 png("figs/casos_diarios_Macapa.png", res = 300,
@@ -53,4 +54,6 @@ plot(new_confirmed ~ date, data = macapa,
      pch = 19, log = "y")
 lines(new_confirmed ~ date, data = macapa,
       col = vermelho_trans)
+mtext("Fonte: Brasil.io", side = 1, adj = 1,
+      padj = 8, cex = 0.8)
 dev.off()
