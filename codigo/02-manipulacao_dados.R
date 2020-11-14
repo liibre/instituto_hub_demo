@@ -20,8 +20,9 @@ class(amapa$last_available_date)
 amapa$date <- as.Date(amapa$date)
 amapa$last_available_date <- as.Date(amapa$last_available_date)
 
+class(amapa$date)
+
 range(amapa$date)
-range(amapa$last_available_date)
 
 # 3. Entendendo as colunas com os dados ----------------------------------------
 # Olhando para os dados de casos e obitos
@@ -29,12 +30,17 @@ range(amapa$last_available_date)
 acu <- aggregate(last_available_confirmed ~ city, FUN = max, data = amapa)
 acu[order(acu$last_available_confirmed), ]
 
-## casos acumulados proporcionais à populacao
+b## casos acumulados proporcionais à populacao
 acu_pop <- aggregate(last_available_confirmed_per_100k_inhabitants ~ city, FUN = max, data = amapa)
 acu_pop[order(acu_pop$last_available_confirmed), ]
 
 # 4. Separando dados de estado e municipio -------------------------------------
 estado <- amapa[amapa$place_type == "state", c(-15)]
+
+# outra forma: onde a coluna city é NA
+estado2 <- amapa[is.na(amapa$city), c(-15)]
+## as duas formas tem o mesmo resultado:
+all.equal(estado2, estado)
 
 head(estado)
 tail(estado)
@@ -50,8 +56,7 @@ tail(macapa)
 plot(last_available_confirmed ~ date, data = macapa)
 lines(last_available_confirmed ~ date, data = macapa)
 
-# adicionando linha do municipio
-## para o estado todo
+# para o estado todo
 plot(last_available_confirmed ~ date, data = estado,
      xlab = "Data de notificação", ylab = "Casos acumulados")
 lines(last_available_confirmed ~ date, data = estado)
@@ -61,4 +66,7 @@ lines(last_available_confirmed ~ date, data = macapa, col = "red")
 points(last_available_confirmed ~ date, data = macapa, col = "red")
 legend("topleft", c("estado AP", "município Macapá"), pch = 1, col = c("black", "red"))
 
+# Escrevendo os dados
+write.csv(estado, "dados/processados/02-estado_AP.csv", row.names = FALSE)
 
+write.csv(macapa, "dados/processados/02-municipio_Macapa.csv", row.names = FALSE)
